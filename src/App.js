@@ -48,7 +48,8 @@ function App() {
         isSignedIn: false,
         name : '',
         email : '',
-        photo : ''
+        photo : '',
+        password : ''
       }
       setUser(signedOutUser);
       console.log(res);
@@ -57,6 +58,20 @@ function App() {
       
     })
   }
+  const handleChange = e => {
+    const newUserInfo = {
+      ...user
+    };
+
+    // perform validation
+
+    newUserInfo[e.target.name] = e.target.value;
+    setUser(newUserInfo);
+  }
+
+  const createAccount = () => {
+    console.log(user.email, user.password);
+  } 
 
   return (
     <div className="App">
@@ -71,6 +86,12 @@ function App() {
           <img src={user.photo} alt=""></img>
         </div>
       }
+      <h1>Our Own Authentication</h1>
+          <input type='text' onBlur={handleChange} name='email' placeholder='Your Email'/>
+          <br/>
+          <input type='password' onBlur={handleChange} name='password' placeholder='Your password'/>
+          <br/>
+          <button onClick={createAccount}>Create Account</button>
     </div>
   );
 }
